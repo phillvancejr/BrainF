@@ -26,4 +26,5 @@ Options:
     -h, --help      Display this message
     -c              Compile to executable
 ```
+![](bf_demo.gif)
 

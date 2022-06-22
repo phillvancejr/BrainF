@@ -143,7 +143,6 @@ void interpret(char* src, size_t src_len) {
             if (v <= 127)
             printf("%c",v);
             i++;
-            // TODO? special syscalls over 128?
             break;
         }
         case ',':
@@ -218,52 +217,51 @@ int main() {
         }
             
         switch(c){
-            case '+':
-                cells[dp]++;
-                i++;
-                break;
-            case '-':
-                cells[dp]--;
-                i++;
-                break;
-            case '>':
-                dp += dp < MAX_CELLS ? 1 : 0;
-                i++;
-                break;
-            case '<':
-                dp -= dp > 0 ? 1 : 0;
-                i++;
-                break;
-            case '.': {
-                u8 v = cells[dp]; 
-                if (v <= 127)
-                    printf("%c",v);
-                i++;
-                // TODO? special syscalls over 128?
-                break;
-                }
-            case ',':
-                if(dp < MAX_CELLS && dp >= 0)
-                    cells[dp]=getchar();
-                i++;
-                break;
-            case '[':
-                if (cells[dp] == 0)
-                    i = ops[i];
-                else 
-                    i++;
-                break;
-            case ']':
-                if (cells[dp] == 0)
-                    i++;
-            else 
-                i = ops[i];
+        case '+':
+            cells[dp]++;
+            i++;
             break;
-            // additions
-            case '~':
+        case '-':
+            cells[dp]--;
+            i++;
+            break;
+        case '>':
+            dp += dp < MAX_CELLS ? 1 : 0;
+            i++;
+            break;
+        case '<':
+            dp -= dp > 0 ? 1 : 0;
+            i++;
+            break;
+        case '.': {
+            u8 v = cells[dp]; 
+            if (v <= 127)
+                printf("%c",v);
+            i++;
+            break;
+            }
+        case ',':
+            if(dp < MAX_CELLS && dp >= 0)
+                cells[dp]=getchar();
+            i++;
+            break;
+        case '[':
+            if (cells[dp] == 0)
+                i = ops[i];
+            else 
                 i++;
-                dump_cells(100);
-                break;
+            break;
+        case ']':
+            if (cells[dp] == 0)
+                i++;
+        else 
+            i = ops[i];
+        break;
+        // additions
+        case '~':
+            i++;
+            dump_cells(100);
+            break;
         }
     }
     return 0;

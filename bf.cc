@@ -70,18 +70,18 @@ int main(int argc, char** argv) {
     }
     memset(cells,0,MAX_CELLS);
     memset(ops,0,MAX_OPS);
-	char* src;
-	size_t src_len;
-	FILE* src_file = fopen(file_path, "r");
-	fseek(src_file, 0, SEEK_END);
-	src_len = ftell(src_file);
-	rewind(src_file);
-	src = (char*)malloc(src_len+1);
-	fread(src,1,src_len,src_file);
-	src[src_len]='\0';
-	fclose(src_file);
+    char* src;
+    size_t src_len;
+    FILE* src_file = fopen(file_path, "r");
+    fseek(src_file, 0, SEEK_END);
+    src_len = ftell(src_file);
+    rewind(src_file);
+    src = (char*)malloc(src_len+1);
+    fread(src,1,src_len,src_file);
+    src[src_len]='\0';
+    fclose(src_file);
 	
-	size_t brackets[MAX_OPS];
+    size_t brackets[MAX_OPS];
     memset(brackets,0,MAX_OPS);
 	size_t bracket_top = -1;
 	// match ending brackets	
@@ -122,8 +122,7 @@ void interpret(char* src, size_t src_len) {
         }
             
 		switch(c){
-			case '+':
-                // printf("OLD %d\n", cells[dp]);
+            case '+':
 				cells[dp]++;
                 i++;
 				break;

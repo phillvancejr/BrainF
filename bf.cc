@@ -83,20 +83,20 @@ int main(int argc, char** argv) {
 	
     size_t brackets[MAX_OPS];
     memset(brackets,0,MAX_OPS);
-	size_t bracket_top = -1;
-	// match ending brackets	
-	for (int i = 0; i < src_len; i++) {
-		char c = src[i];
-		if (c == '[') {
-			brackets[++bracket_top]=i;
-		} else if (c == ']') {
-			size_t open = brackets[bracket_top--];
-			ops[open]=i;
-			ops[i]=open;
-		} else {
-			ops[i]=i;
-		}
-	}
+    size_t bracket_top = -1;
+    // match ending brackets	
+    for (int i = 0; i < src_len; i++) {
+        char c = src[i];
+    if (c == '[') {
+        brackets[++bracket_top]=i;
+    } else if (c == ']') {
+        size_t open = brackets[bracket_top--];
+        ops[open]=i;
+        ops[i]=open;
+    } else {
+        ops[i]=i;
+        }
+    }
 
     if (compile)
         c_backend(src, src_len, file_path);
@@ -114,63 +114,63 @@ void dump_cells(size_t cell_count) {
 
 void interpret(char* src, size_t src_len) {
     size_t i = 0;
-	for (; i < src_len;) {
-		char c = src[i];
+    for (; i < src_len;) {
+        char c = src[i];
         if (isspace(c)){
             i++;
             continue;
         }
-            
-		switch(c){
-            case '+':
-				cells[dp]++;
-                i++;
-				break;
-			case '-':
-				cells[dp]--;
-                i++;
-				break;
-			case '>':
-				dp += dp < MAX_CELLS ? 1 : 0;
-                i++;
-				break;
-			case '<':
-				dp -= dp > 0 ? 1 : 0;
-                i++;
-				break;
-			case '.': {
-				u8 v = cells[dp]; 
-				if (v <= 127)
-					printf("%c",v);
-                i++;
-				// TODO? special syscalls over 128?
-				break;
-			}
-			case ',':
-				if(dp < MAX_CELLS && dp >= 0)
-					cells[dp]=getc(stdin);
-                i++;
-				break;
-            case '[':
-                if (cells[dp] == 0)
-                    i = ops[i];
-                else 
-                    i++;
-                break;
-            case ']':
-                if (cells[dp] == 0)
-                    i++;
-                else  
-                    i = ops[i];
-                break;
-            // additions
-            case '~':
-                i++;
-                dump_cells(100);
-                break;
-		}
-		
-	}
+
+        switch(c){
+        case '+':
+        cells[dp]++;
+        i++;
+        break;
+        case '-':
+        cells[dp]--;
+        i++;
+        break;
+        case '>':
+        dp += dp < MAX_CELLS ? 1 : 0;
+        i++;
+        break;
+        case '<':
+        dp -= dp > 0 ? 1 : 0;
+        i++;
+        break;
+        case '.': {
+        u8 v = cells[dp]; 
+        if (v <= 127)
+        printf("%c",v);
+        i++;
+        // TODO? special syscalls over 128?
+        break;
+        }
+        case ',':
+        if(dp < MAX_CELLS && dp >= 0)
+        cells[dp]=getc(stdin);
+        i++;
+        break;
+        case '[':
+        if (cells[dp] == 0)
+        i = ops[i];
+        else 
+        i++;
+        break;
+        case ']':
+        if (cells[dp] == 0)
+        i++;
+        else  
+        i = ops[i];
+        break;
+        // additions
+        case '~':
+        i++;
+        dump_cells(100);
+        break;
+        }
+
+    }
 }
 
 void tcc_error_handler(void* _, const char* msg){

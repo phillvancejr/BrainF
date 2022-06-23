@@ -24,7 +24,7 @@ Yasm is more flexible as a backend, but of course there are some platform specif
 
 #### Building
 requires C++ 17. makefile provided for unix (developed on Mac OS).
-```shell
+```
 make 
 ./bf
 Usage: bf [options] file_path

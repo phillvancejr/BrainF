@@ -1,5 +1,5 @@
 ## Brain F interpreter and Compiler with TCC
-Experimenting with using TCC to compile to binaries. I didn't love it, and I think I almost prefer compiling to assembly with nasm. Started out in pure C, but then constructing strings got really annoying so I switched to C++. I've included a single additional langauge command, `~` which dumps 100 cell values for debugging
+Experimenting with using TCC and Yasm to compile to binaries. I didn't love TCC, and I think I almost prefer compiling to assembly with yasm. Started out in pure C, but then constructing strings got really annoying so I switched to C++. I've included a single additional langauge command, `~` which dumps 100 cell values for debugging
 
 #### bf compiler
 Run the interpreter

@@ -13,7 +13,7 @@ yasm:
 	cmake --build . && \
 	cd ../../ && \
 	mkdir -p backends && \
-	cp yasm/build/yasm backends && \
+	cp yasm/build/yasm backends
 
 # run the tcc task once for each platform
 tcc:

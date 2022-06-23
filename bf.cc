@@ -333,10 +333,6 @@ void c_backend(char* src, size_t src_len, char* file_path) {
 
 }
 
-#include <iostream>
-using std::cout;
-#define nl "\n"
-
 auto yasm_header = R"(
 ; assembly bf interpreter for compiling to binary
 segment .text

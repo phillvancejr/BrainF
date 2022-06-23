@@ -8,6 +8,8 @@
 #include <fstream>
 // to get path to exe on mac
 #include <mach-o/dyld.h>
+// get mac os version for lld
+// #include <sys/sysctl.h>
 
 #define MAX_CELLS 30000
 
@@ -659,7 +661,14 @@ void yasm_64_mac(char* src, size_t src_len, char* file_path) {
 
     // cout << "YASM PATH " << yasm_path << nl;
     std::string cmd = yasm_path + " -f macho64 " + file_name + ".s";
+
+    // these lines use llvm's linker to do the linking, however you need the lldb linker 104 KB + libLLVM.dylib 104.6MB
+    // char mac_version[256];
+    // auto size = sizeof(mac_version);
+    // sysctlbyname("kern.osproductversion", mac_version, &size, 0, 0);
+    //cmd += " && /usr/local/Cellar/llvm/13.0.1_1/bin/lld -flavor darwin -lSystem -arch x86_64 -platform_version macos " + std::string{mac_version} + " " + std::string{mac_version} + " " + file_name + ".o -o " + file_name;
     cmd += " && ld -macosx_version_min 10.10 -lSystem " + file_name + ".o -o " + file_name ;
+
 
     // cout << "CMD: " << cmd << nl;
 
@@ -704,9 +713,3 @@ print_fmt: db "%c",0
     system(remove.data());
 }
 
-
-
-
-auto nasm_end = R"(
-
-)";

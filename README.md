@@ -34,5 +34,7 @@ Options:
     -c              Compile to executable via TCC for Mac or Linux
     -mac            Compile to executable via Yasm for x64 Mac
 ```
+The `bf` executable requires the `backends` folder to be next to it
+
 ![](bf_demo.gif)
 
